@@ -1,4 +1,6 @@
 from django.db import models
+from .utils import sluni_unique_generator
+from django.db.models.signals import pre_save
 
 # custom queryset usado para alterar comportamentoi padrão do queryset retornado pelo manager
 class ProductQuerySet(models.QuerySet):
@@ -55,4 +57,10 @@ class Product(models.Model):
 	# eletronics_objects = ProductEletronicsManager()
 	def __str__(self):
 		return self.name
+
+
+def product_pre_save_receiver(sender, instance, *args, **kwargs):
+	if not instance.slug:
+		instance.slug = unique_slug_generator(instance)
+	pre_save.connect(product_pre_save_receiver, sender = Product)
 
