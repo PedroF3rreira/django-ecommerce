@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block site_title %}Conatos{% endblock %}
+{% block content %}
+	
+	<form method="post" class="col-6 p-4 mx-auto ">
+		<fieldset class="border rounded bg-faded p-3 shadow-lg">
+		<legend class="bg-secondary text-center text-light p-1 rounded shadow-md">Formulário de Contato</legend>
+			{% csrf_token %}
+			{{ form }}
+			<input type="submit" value="Enviar" class="btn btn-primary mt-3">
+		</fieldset>
+	</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block site_title %}Produtos lançamentos{% endblock %}
+{% block content %}
+	{% load static %}
+	<div class="bg-faded py-2 rounded">
+		<h3 class="border border-primary text-center rounded shadow-lg p-2 bg-secondary mx-3 text-light">	Nossos Lançamentos e Novidades
+		</h3>
+		<div class="d-flex justify-content-center flex-wrap " >
+		{% for product in products %}
+			<div class="card mx-1 my-1" style="width: 300px; min-height: 250px;">
+				<img class="card-img-top " src="{{ product.image.url }}" alt="Card image cap">
+				<div class="card-body ">
+					<h5 class="card-title">{{ product.name }}</h5>
+					<p class="card-text ">{{ product.description }}</p>
+				</div>
+				
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+{% endblock %}
