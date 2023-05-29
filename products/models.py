@@ -1,5 +1,5 @@
 from django.db import models
-from .utils import sluni_unique_generator
+from .utils import slug_unique_generator
 from django.db.models.signals import pre_save
 
 # custom queryset usado para alterar comportamentoi padrão do queryset retornado pelo manager
@@ -45,7 +45,7 @@ class ProductManager(models.Manager):
 
 class Product(models.Model):
 	name = models.CharField(max_length=150)
-	slug = models.SlugField(max_length=30, default='slug', unique=True)
+	slug = models.SlugField(max_length=30, default='', unique=True, blank=True)
 	description = models.TextField(blank=True)
 	price = models.DecimalField(max_digits=20, decimal_places=2, default=10.00)
 	image = models.ImageField(upload_to='products/', blank=True, null=True)
@@ -55,12 +55,19 @@ class Product(models.Model):
 
 	objects = ProductManager()
 	# eletronics_objects = ProductEletronicsManager()
+	
+
 	def __str__(self):
 		return self.name
 
 
+	def get_absolut_url(self):
+		return '/produtos/{slug}/'.format(slug = self.slug)
+
+
+
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
 	if not instance.slug:
-		instance.slug = unique_slug_generator(instance)
-	pre_save.connect(product_pre_save_receiver, sender = Product)
+		instance.slug = slug_unique_generator(instance)
+pre_save.connect(product_pre_save_receiver, sender = Product)
 

@@ -15,7 +15,7 @@
 				{% endif %}
 				
 				<div class="card-body ">
-					<h5 class="card-title">{{ product.name }}</h5>
+					<h5 class="card-title"><a href="{{ product.get_absolut_url }}">{{ product.name }}</a></h5>
 					<p class="card-text ">{{ product.description }}</p>
 				</div>
 				<div class="card-footer bg-secondary" >

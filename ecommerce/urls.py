@@ -19,12 +19,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from .views import loginUser, LogoutView, PasswordChange
 
 urlpatterns = [
     path('', include('corporatesite.urls')),
     path('', include('products.urls')),
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    path('contas/login/', loginUser, name='login'),
+    path('contas/logout/', LogoutView.as_view(), name='logout'),
+    path('contas/alterar/senha', PasswordChange.as_view(), name='changer_password'),
 ]
 
 if settings.DEBUG:

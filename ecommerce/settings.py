@@ -144,3 +144,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "pedro.edu1993@gmail.com"
 EMAIL_HOST_PASSWORD = "ezmgitqosjhqtcih"
+
+LOGIN_URL = '/'
