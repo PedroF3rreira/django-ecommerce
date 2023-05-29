@@ -13,9 +13,12 @@
     	<div class="col-4 mx-auto alert alert-danger">{{ message }}</div>
     {% endfor %}
 {% endif %}
-	<form method="POST" action="{% url 'login' %}" class="col-sm-4 mx-auto border mt-5 rounded p-2">
+	<form method="POST" action="{% url 'register' %}" class=" col-sm-4 mx-auto border mt-5 rounded p-2">
 		<h3 class="text-muted text-center">e-Commerce Django</h3>
 		{% csrf_token %}
+		{% for error in form.errors.values %}
+			<div class="alert alert-danger">{{ error }}</div>
+		{% endfor %}
 		{% for field in form %}
 			{{ field.label_tag }}
 			{{ field }}

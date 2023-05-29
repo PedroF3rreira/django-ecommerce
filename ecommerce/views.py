@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import views as auth_views
-from .forms import LoginForm, PasswordChange
+from .forms import LoginForm, PasswordChange, RegisterUserForm
 from  django.contrib.auth.models import User
 from django.urls import reverse
 
@@ -11,6 +11,21 @@ from django.urls import reverse
 # 	authentication_form = LoginForm
 	
 # 	next_page = '/'
+
+def registerUser(request):
+	form = RegisterUserForm(request.POST or None)
+
+	if form.is_valid():
+		username = form.cleaned_data.get('username')
+		password = form.cleaned_data.get('password1')
+
+		user = User.objects.create_user(username=username, password=password)
+		user.save()
+		
+		return redirect('login')
+	
+
+	return render(request, 'auth/register.html', {"form": form})
 
 def loginUser(request):
 

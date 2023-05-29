@@ -7,21 +7,7 @@
 		</h3>
 		<div class="d-flex justify-content-center flex-wrap " >
 		{% for product in products %}
-			<div class="card mx-1 my-1" style="width: 300px; min-height: 250px;">
-				{% if True not in product.image %}
-					<img class="card-img-top " src="{{ product.image.url }}" alt="Card image cap">
-				{% else %}
-					<img class="card-img-top " src="{% static 'assets/img/product_default.png' %}" alt="Card image cap">
-				{% endif %}
-				
-				<div class="card-body ">
-					<h5 class="card-title"><a href="{{ product.get_absolut_url }}">{{ product.name }}</a></h5>
-					<p class="card-text ">{{ product.description }}</p>
-				</div>
-				<div class="card-footer bg-secondary" >
-					<a href="#" class="card-text align-bottom ">visite nossa loja online</a>
-				</div>
-			</div>
+			{% include './snippets/card_product.html' with product=product %}
 		{% endfor %}
 		</div>
 	</div>

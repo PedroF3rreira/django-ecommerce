@@ -2,6 +2,8 @@ from django.db import models
 from .utils import slug_unique_generator
 from django.db.models.signals import pre_save
 
+from django.urls import reverse
+
 # custom queryset usado para alterar comportamentoi padrão do queryset retornado pelo manager
 class ProductQuerySet(models.QuerySet):
 	
@@ -62,7 +64,8 @@ class Product(models.Model):
 
 
 	def get_absolut_url(self):
-		return '/produtos/{slug}/'.format(slug = self.slug)
+		#return '/produtos/{slug}/'.format(slug = self.slug) hard code
+		return reverse("products:detail", kwargs={"slug": self.slug})
 
 
 
