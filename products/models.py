@@ -4,7 +4,7 @@ from django.db.models.signals import pre_save
 
 from django.urls import reverse
 
-# custom queryset usado para alterar comportamentoi padrão do queryset retornado pelo manager
+# custom queryset usado para alterar comportamento padrão do queryset retornado pelo manager
 class ProductQuerySet(models.QuerySet):
 	
 	def active(self):
@@ -53,8 +53,9 @@ class Product(models.Model):
 	image = models.ImageField(upload_to='products/', blank=True, null=True)
 	featured = models.BooleanField(default=False)
 	active = models.BooleanField(default=True)
+	timestamp = models.DateTimeField(auto_now_add=True)
 	
-
+	# definindo um manager personalizado para o model Product
 	objects = ProductManager()
 	# eletronics_objects = ProductEletronicsManager()
 	
@@ -62,7 +63,7 @@ class Product(models.Model):
 	def __str__(self):
 		return self.name
 
-
+	# pega url do produto
 	def get_absolut_url(self):
 		#return '/produtos/{slug}/'.format(slug = self.slug) hard code
 		return reverse("products:detail", kwargs={"slug": self.slug})
@@ -72,5 +73,7 @@ class Product(models.Model):
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
 	if not instance.slug:
 		instance.slug = slug_unique_generator(instance)
+
+# sinal antes de salvar o registro executa o método para gerar um slug unica
 pre_save.connect(product_pre_save_receiver, sender = Product)
 

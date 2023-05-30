@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # myapps
     'corporatesite.apps.CorporatesiteConfig',
     'products.apps.ProductsConfig',
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [

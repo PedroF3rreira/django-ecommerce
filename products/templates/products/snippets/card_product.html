@@ -12,7 +12,7 @@
 	</a>
 	<div class="card-body ">
 		<h5 class="card-title text-primary">{{ product.name }}</h5>
-		<p class="card-text text-muted ">{{ product.description }}</p>
+		<p class="card-text text-muted ">{{ product.description|truncatewords:10 }}</p>
 	</div>
 	<div class="card-footer bg-secondary" >
 		<a href="{{ get_absolut_url }}" class="card-text align-bottom ">Mais detalhes</a>

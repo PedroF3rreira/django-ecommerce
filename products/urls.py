@@ -3,6 +3,7 @@ from django.urls import path
 
 from . import views
 
+# define namespace das rotas
 app_name = "products"
 
 urlpatterns = [

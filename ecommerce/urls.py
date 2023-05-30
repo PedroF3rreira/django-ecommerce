@@ -24,8 +24,10 @@ from .views import loginUser, LogoutView, PasswordChange, registerUser
 urlpatterns = [
     path('', include('corporatesite.urls')),
     path('produtos/', include('products.urls',  namespace="products")),
+    path('busca/', include('search.urls',  namespace="busca")),
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    
     path('contas/login/', loginUser, name='login'),
     path('contas/logout/', LogoutView.as_view(), name='logout'),
     path('contas/alterar/senha', PasswordChange.as_view(), name='changer_password'),
