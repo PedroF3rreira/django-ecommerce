@@ -8,5 +8,5 @@ from .views import SearchProductView
 app_name = 'busca'
 
 urlpatterns = [
-	path('', SearchProductView.as_view(), name="search")
+	path('', SearchProductView.as_view(), name="query")
 ]	

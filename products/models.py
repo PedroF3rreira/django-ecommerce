@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.db import models
 from .utils import slug_unique_generator
 from django.db.models.signals import pre_save
@@ -14,6 +15,12 @@ class ProductQuerySet(models.QuerySet):
 	def featured(self):
 		return self.filter(featured = True)
 
+	# método queryset para busca produtos por varios campos com Q lookups
+	def search(self, query):
+		lookups = Q(name__icontains=query) | Q(description__icontains=query)
+		return self.filter(lookups).distinct()
+
+
 """
 esta tecnica pode ser usada por exemplo para termos métodos que retornem os produtos
 pela sua categoria tipo Product.eletronics_objects.all(), Product.plates_objects.all() etc...
@@ -26,10 +33,15 @@ class ProductManager(models.Manager):
 	# método extra adicionado
 	def get_by_id(self, pk):
 		qs = self.get_queryset().filter(id=pk)
-		if qs.count() == 1:# método count() usuado para saber se algo foi encontrado
+		if qs.count() == 1:# método count() usado para saber se algo foi encontrado
 			return qs.first()
 		return None
 
+	# método extra adicionado
+	def search(self, query):
+		return self.get_queryset().active().search(query)
+
+	
 	#sobrescrevendo o método get_queryset do manager para retornar o qs custom ProductQuerySet
 	def get_queryset(self):
 		return ProductQuerySet(self.model, using = self._db)

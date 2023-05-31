@@ -16,14 +16,13 @@
     </head>
     <body>
         <header>
-            <h1 class="site-heading text-center text-faded d-none d-lg-block">
-                <span class="site-heading-upper text-primary mb-3">Ecommerce Django</span>
-                <span class="site-heading-lower">Aplicação de uma Loja</span>
-            </h1>
             <div class=" d-flex  justify-content-end my-2">
                 {% if user.is_authenticated %}
                     <p class="text-faded mx-2">Bem vindo: {{ user }}</p>
                     <a class="mx-2" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="mr-3" href="{% url 'login' %}">Login </a>
+                    <a class="mr-3" href="{% url 'register' %}">Registrar</a>
                 {% endif %}
             </div>
         </header>
