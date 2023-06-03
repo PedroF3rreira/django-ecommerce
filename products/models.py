@@ -17,7 +17,7 @@ class ProductQuerySet(models.QuerySet):
 
 	# método queryset para busca produtos por varios campos com Q lookups
 	def search(self, query):
-		lookups = Q(name__icontains=query) | Q(description__icontains=query)
+		lookups = Q(name__icontains=query) | Q(description__icontains=query) | Q(price__icontains=query)
 		return self.filter(lookups).distinct()
 
 

@@ -1,8 +1,9 @@
 
 {% load static %}
+{% load filters_custom %}
 
-<div class="card mx-1 my-1" style="width: 300px; min-height: 250px;">
-	<a href="{{ product.get_absolut_url }}" class=" hover-overlay">
+<div data-aos="fade-up"class="card mx-1 my-1" style="width: 300px; min-height: 200px;">
+	<a href="{{ product.get_absolut_url }}" class="rounded overflow-hidden p-1" style="max-height: 200px;">
 		{% if True not in product.image %}
 			<img class="card-img-top " src="{{ product.image.url }}" alt="Card image cap">
 		{% else %}
@@ -11,10 +12,13 @@
 		{% endif %}
 	</a>
 	<div class="card-body ">
-		<h5 class="card-title text-primary">{{ product.name }}</h5>
-		<p class="card-text text-muted ">{{ product.description|truncatewords:10 }}</p>
+		<p class="card-text text-muted "><span class="">{{ product.name }}</span> <br>{{ product.description|truncatewords:15 }}</p>
+		<p class="text-muted" style="font-size: 10pt;">
+			<span class="font-weight-bold text-danger" style="font-size: 25px">R$ {{ product.price }}</span> no Pix <br/> 
+			ou em 10x de <span class="font-weight-bold" style="color: #393494;">R$ {{ product.price|divide_values }} </span> no cartão <img width="30px" src="{% static 'assets/img/cart_credit.png' %}">
+		</p>
 	</div>
-	<div class="card-footer bg-secondary" >
-		<a href="{{ get_absolut_url }}" class="card-text align-bottom ">Mais detalhes</a>
+	<div class="card-footer">
+		<a class="btn btn-success btn-block text-uppercase">Compre agora</a>
 	</div>
 </div>
