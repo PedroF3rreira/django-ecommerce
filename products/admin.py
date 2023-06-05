@@ -5,6 +5,7 @@ from .models import Product
 class ProductAdmin(admin.ModelAdmin):
 	list_display = ['name', 'description', 'slug', 'price', 'image', 'featured', 'active']
 
+
 	class meta:
 		model=Product
 

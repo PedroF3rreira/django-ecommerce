@@ -5,7 +5,7 @@
 <div data-aos="fade-up"class="card mx-1 my-1" style="width: 300px; min-height: 200px;">
 	<a href="{{ product.get_absolut_url }}" class="rounded overflow-hidden p-1" style="max-height: 200px;">
 		{% if True not in product.image %}
-			<img class="card-img-top " src="{{ product.image.url }}" alt="Card image cap">
+			<img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
 		{% else %}
 			<img class="card-img-top " src="{% static 'assets/img/product_default.png' %}" 
 			alt="Card image cap">
@@ -15,7 +15,10 @@
 		<p class="card-text text-muted "><span class="">{{ product.name }}</span> <br>{{ product.description|truncatewords:15 }}</p>
 		<p class="text-muted" style="font-size: 10pt;">
 			<span class="font-weight-bold text-danger" style="font-size: 25px">R$ {{ product.price }}</span> no Pix <br/> 
-			ou em 10x de <span class="font-weight-bold" style="color: #393494;">R$ {{ product.price|divide_values }} </span> no cartão <img width="30px" src="{% static 'assets/img/cart_credit.png' %}">
+			ou em 10x de 
+			<span class="font-weight-bold" style="color: #393494;">
+				R$ {{ product.price|divide_values }} 
+			</span> no cartão <img width="30px" src="{% static 'assets/img/cart_credit.png' %}">
 		</p>
 	</div>
 	<div class="card-footer">
